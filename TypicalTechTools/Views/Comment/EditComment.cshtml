@@ -1,0 +1,39 @@
+﻿@model TypicalTechTools.Models.Comment
+
+@{
+    ViewData["Title"] = "EditComment";
+}
+
+<h1>EditComment</h1>
+
+<h4>Comment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditComment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(c => c.Id)
+            @Html.HiddenFor(c => c.Code)
+            @Html.HiddenFor(c => c.CreatedDate)
+            @Html.HiddenFor(c => c.SessionId)
+
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to Comments", "CommentList", "Comment", new {id = Model.Code})
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

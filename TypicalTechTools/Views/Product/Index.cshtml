@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+    string Authenticated = Context.Session.GetString("Authenticated") ?? "false";
+}
+
+<div class="text-center">
+    <h1>Products</h1>
+</div>
+
+<div class="card-container row">
+
+    @foreach (var product in Model)
+    {
+        <div class="single-card card shadow m-2 text-center" style="width: 18rem; height:20rem">
+            <h2>@product.Name</h2>
+            <h3>$@product.Price</h3>
+            <p style="height:12rem">@product.Description</p>
+            <small>Product Code: @product.Code</small>
+            <div>
+                @Html.ActionLink("Comments", "CommentList", "Comment", new { id = product.Code }, new { @class = "btn btn-primary m-2" })
+                @if (Authenticated.Equals("true"))
+                {
+                    @Html.ActionLink("Edit Price", "EditProduct", new { id = product.Id }, new { @class = "btn btn-danger m-2" })
+                }
+            </div>
+
+        </div>
+    }
+    @if (Authenticated.Equals("true"))
+    {
+        <div class="single-card card shadow m-2 align-items-center" style="width: 18rem; height:20rem" asp-action="AddProduct">
+            <a asp-action="AddProduct" class="btn btn-success m-2">Add New Product</a>
+        </div>
+    }
+
+</div>
