@@ -18,6 +18,13 @@
             <p style="height:12rem">@product.Description</p>
             <small>Product Code: @product.Code</small>
             <div>
+                @if (product.UpdatedDate != null && Authenticated.Equals("true"))
+                {
+                    @Html.Raw("Last Updated:")
+                    @Html.Raw(product.UpdatedDate.Value.ToString("dd MMMM yyyy hh:mm tt"))
+                }
+            </div>
+            <div>
                 @Html.ActionLink("Comments", "CommentList", "Comment", new { id = product.Code }, new { @class = "btn btn-primary m-2" })
                 @if (Authenticated.Equals("true"))
                 {

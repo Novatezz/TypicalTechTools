@@ -37,6 +37,14 @@ namespace TypicalTools.Controllers
         // Displays the form for adding a new product
         public ActionResult AddProduct()
         {
+            // Check if the user is authenticated by reading from the session
+            string Authenticated = HttpContext.Session.GetString("Authenticated") ?? "false";
+
+            // If not authenticated, redirect to the Login action
+            if (Authenticated.Equals("false"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
@@ -45,6 +53,14 @@ namespace TypicalTools.Controllers
         [HttpPost]
         public ActionResult AddProduct(Product product) 
         {
+            // Check if the user is authenticated by reading from the session
+            string Authenticated = HttpContext.Session.GetString("Authenticated") ?? "false";
+
+            // If not authenticated, redirect to the Login action
+            if (Authenticated.Equals("false"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             try
             {
                 // Check if the provided product data is valid
@@ -77,6 +93,14 @@ namespace TypicalTools.Controllers
         [HttpGet]
         public ActionResult EditProduct(int id)
         {
+            // Check if the user is authenticated by reading from the session
+            string Authenticated = HttpContext.Session.GetString("Authenticated") ?? "false";
+
+            // If not authenticated, redirect to the Login action
+            if (Authenticated.Equals("false"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             // Retrieve the product by ID
             Product product = _repository.GetProductById(id);
             // Return the EditProduct view with the product data
@@ -88,6 +112,14 @@ namespace TypicalTools.Controllers
         [HttpPost]
         public ActionResult EditProduct(Product product)
         {
+            // Check if the user is authenticated by reading from the session
+            string Authenticated = HttpContext.Session.GetString("Authenticated") ?? "false";
+
+            // If not authenticated, redirect to the Login action
+            if (Authenticated.Equals("false"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             try {
                 // Check if the provided product data is valid
                 if (ModelState.IsValid == true)

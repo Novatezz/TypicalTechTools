@@ -19,8 +19,8 @@ namespace TypicalTechTools.Models
         //Name of product listing
         [Required]
         [StringLength(40, ErrorMessage ="Product Name must be less than 40 characters.")]
-        [RegularExpression("^[a-zA-Z0-9_ ']", ErrorMessage =
-            "Product Name can only contain letters, numbers, hyphens, spaces, and single quotes")]
+        [RegularExpression("^[a-zA-Z0-9_ ']*$", ErrorMessage =
+            "Product Name can only contain letters, numbers, underscores, spaces, and single quotes")]
         public string Name { get; set; } = string.Empty;
 
         //Price of product
